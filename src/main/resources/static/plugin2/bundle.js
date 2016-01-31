@@ -1,0 +1,1 @@
+console.log("This is plugin2 talking!!");
