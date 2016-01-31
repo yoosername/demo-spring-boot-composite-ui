@@ -45,7 +45,7 @@ public class DefaultUIService implements UIService {
         // Fake looking up css from service registry and returning a list of locations
         List<String> tmpCSS = new ArrayList<String>();
         for( String plugin : getActiveUIPlugins() ) {
-            tmpCSS.add("/" + plugin + "/style.css");
+            tmpCSS.add("/src/" + plugin + "/style.css");
         }
         css = tmpCSS;
         // probably send UPDATED_CSS_EVENT
@@ -78,7 +78,7 @@ public class DefaultUIService implements UIService {
         String pluginJS = "";
 
         for( String plugin : getActiveUIPlugins() ) {
-            pluginJS = getJSContents("static/"+plugin+"/bundle.js");
+            pluginJS = getJSContents("static/dist/"+plugin+"/bundle.js");
             bundle += "(function(){\n\n" + pluginJS + "\n\n})();\n\n";
         }
 
