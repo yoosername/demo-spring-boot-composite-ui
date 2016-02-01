@@ -16,9 +16,9 @@ define('demo/greet', function() {
     return React.createClass({
             render: function () {
                 return (
-                    React.createElement("div", {className: "greetBox"}, 
-                        "Hello ", this.props.name
-                    )
+                    <div className="greetBox">
+                        Hello {this.props.name}
+                    </div>
                 );
             }
         })

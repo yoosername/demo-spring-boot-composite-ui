@@ -9,6 +9,6 @@ plugin1.hello("plugin2");
 var Greet = require("demo/greet");
 
 ReactDOM.render(
-    React.createElement(Greet, {name: "plugin2"}),
+    <Greet name="plugin2"/>,
     document.getElementById('app')
 );
