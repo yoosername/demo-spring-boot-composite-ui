@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Composite UI Demo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
+    <link href="vendor/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css"></link>
+    <!-- Stylesheets derived at runtime from UI Service -->
+    <link th:each="style : ${css}" rel="stylesheet" type="text/css" th:href="${style}"></link>
+
+</head>
+<body>
+
+<div id="app">
+    <!-- Everything in here should be populated by plugin pages-->
+</div>
+
+<script src="vendor/jquery/dist/jquery.js"></script>
+<script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+<script src="vendor/almond/almond.js"></script>
+<script src="vendor/react/react.js"></script>
+<script src="vendor/react/react-dom.js"></script>
+<script src="vendor/react-bootstrap/react-bootstrap.js"></script>
+<script src="bundle.js"></script>
+
+<script>
+    require("react-dom").render(
+            require("react").createElement(require("app")),
+            document.getElementById('app')
+    );
+</script>
+</body>
+</html>

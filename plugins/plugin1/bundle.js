@@ -1,23 +1,28 @@
-var React = require('react');
+console.log("App layout plugin started");
 
-console.log("Plugin 1 loaded!!");
+//
+//    Main App layout wrapper
+//
+define('app', function() {
 
-define('plugin1', function() {
-    return {
-        hello : function(from){
-            console.log("Plugin 1 says hello to " + from);
-        }
-    }
-
-});
-
-define('demo/greet', function() {
+    var AppNavbar = require("app/navbar");
+    var AppSidebar = require("app/sidebar");
 
     return React.createClass({
             render: function () {
                 return (
-                    <div className="greetBox">
-                        Hello {this.props.name}
+                    <div id="wrapper" >
+                        <div className="row">
+                            <div className="col-md-3">
+                                <AppSidebar />
+                            </div>
+                            <div className="col-md-9">
+                                <div className="row">
+                                    <AppNavbar />
+                                </div>
+                                <div id="content"></div>
+                            </div>
+                        </div>
                     </div>
                 );
             }

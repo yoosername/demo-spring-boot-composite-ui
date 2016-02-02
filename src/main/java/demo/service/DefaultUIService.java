@@ -31,8 +31,8 @@ public class DefaultUIService implements UIService {
     private List<String> css;
     private String js;
 
-    public List<String> getActiveUIPlugins(){
-        // Fake using Eureka to lookup UI contributing plugins that are currently active
+    private List<String> getActiveUIPlugins(){
+        // In spring cloud world this would lookup active services which provide a ui component
         return Arrays.asList(
             "plugin1",
             "plugin2",
@@ -40,8 +40,7 @@ public class DefaultUIService implements UIService {
         );
     }
 
-    @Override
-    public void updateCSSImports() {
+    private void updateCSSImports() {
         // Fake looking up css from service registry and returning a list of locations
         List<String> tmpCSS = new ArrayList<String>();
         for( String plugin : getActiveUIPlugins() ) {
@@ -52,7 +51,7 @@ public class DefaultUIService implements UIService {
         log.info("CSS Bundles updated: " + css.toString());
     }
 
-    public String read(String file){
+    private String read(String file){
         String text = "";
 
         URL url = Resources.getResource(file);
@@ -71,19 +70,25 @@ public class DefaultUIService implements UIService {
         return content;
     }
 
-    @Override
-    public void updateJSBundles() {
-        /* Fake looking up js bundles from microservices and combining */
-        String bundle = "";
-        String pluginJS = "";
+    private void updateJSBundles() {
 
+        // TODO: Perhaps wrap the bundles with try / catch with useful error to see what didnt load
+        // load the start fragment for the bundle closure
+        String bundle = getJSContents("static/fragments/start.frag");
+        String preBundleFrag = getJSContents("static/fragments/preBundle.frag");
+        String postBundleFrag = getJSContents("static/fragments/postBundle.frag");
+
+        // for each plugin get bundle contents and add it
         for( String plugin : getActiveUIPlugins() ) {
-            pluginJS = getJSContents("static/"+plugin+"/bundle.js");
-            bundle += "(function(){\n\n" + pluginJS + "\n\n})();\n\n";
+            bundle += preBundleFrag + getJSContents("static/"+plugin+"/bundle.js") + postBundleFrag;
         }
 
+        // tail with the end fragment
+        bundle += getJSContents("static/fragments/end.frag");
+
+        // update the cache
         js = bundle;
-        log.info("JS Bundle updated: " + js.toString());
+        log.info("JS Mega bundle updated: " + bundle.toString());
     }
 
     @Override
@@ -91,7 +96,7 @@ public class DefaultUIService implements UIService {
     public void updateResources() {
         updateCSSImports();
         updateJSBundles();
-        log.info("RESOURCES UPDATED");
+        log.info("JS and CSS RESOURCES UPDATED");
     }
 
     @Override

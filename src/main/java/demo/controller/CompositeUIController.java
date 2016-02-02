@@ -25,7 +25,7 @@ public class CompositeUIController {
         // The ui service should have up to date cache of css and js by now
         model.addAttribute("css", ui.getCSSImports());
         model.addAttribute("js", ui.getJSBundle());
-        return "composite";
+        return "main";
 
     }
 
