@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Composite UI Demo</title>
+    <title>Composite admin dashboard demo</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
     <link href="vendor/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css"></link>
@@ -12,7 +12,7 @@
 <body>
 
 <div id="app">
-    <!-- Everything in here should be populated by plugin pages-->
+    <!-- Everything in here should be populated by feature plugins-->
 </div>
 
 <script src="vendor/jquery/dist/jquery.js"></script>
@@ -21,13 +21,12 @@
 <script src="vendor/react/react.js"></script>
 <script src="vendor/react/react-dom.js"></script>
 <script src="vendor/react-bootstrap/react-bootstrap.js"></script>
+<script src="vendor/react-router/react-router.js"></script>
 <script src="bundle.js"></script>
 
 <script>
-    require("react-dom").render(
-            require("react").createElement(require("app")),
-            document.getElementById('app')
-    );
+    require("dashboard/routes/default");
+    require("dashboard/router").render('app');
 </script>
 </body>
 </html>

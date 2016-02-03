@@ -1,14 +1,65 @@
+/*
+    Feature page wrapper styles
+*/
+.feature-page{
+    width: 95%;
+    position: relative;
+    padding-left: 15px;
+    margin-left: 10px;
+}
+
+/*
+    Dashboard Navbar styles
+*/
+.navbar {
+    border: 0;
+    width: 100%;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #23282e;
+}
+
+.navbar li {
+    float: left;
+}
+
+.navbar li a {
+    display: block;
+    color: #e1ffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.navbar li a:hover {
+    background-color: #111;
+}
+
+.navright{
+    float:right;
+    list-style-type:none;
+}
+
+/*
+    Dashboard Sidebar styles
+*/
 .nav-side-menu {
     overflow: auto;
     font-family: verdana;
     font-size: 12px;
     font-weight: 200;
     background-color: #2e353d;
-    position: fixed;
     top: 0px;
-    width: 300px;
     height: 100%;
     color: #e1ffff;
+    position: fixed;
+    width: inherit;
 }
 .nav-side-menu .brand {
     background-color: #23282e;
@@ -27,17 +78,17 @@
     margin: 0px;
     line-height: 35px;
     cursor: pointer;
-      .collapsed{
-         .arrow:before{
-                   font-family: FontAwesome;
-                   content: "\f053";
-                   display: inline-block;
-                   padding-left:10px;
-                   padding-right: 10px;
-                   vertical-align: middle;
-                   float:right;
-              }
-       }
+.collapsed{
+.arrow:before{
+    font-family: FontAwesome;
+    content: "\f053";
+    display: inline-block;
+    padding-left:10px;
+    padding-right: 10px;
+    vertical-align: middle;
+    float:right;
+}
+}
 }
 .nav-side-menu ul :not(collapsed) .arrow:before,
 .nav-side-menu li :not(collapsed) .arrow:before {

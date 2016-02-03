@@ -1,11 +1,9 @@
-console.log("Feature plugin started");
+console.log("Feature page plugin loaded");
 
 //
-//    Example feature - adds a new route to the global router
+//    Example Dashboard feature page
 //
-define('app/feature', function() {
-
-    console.log("defined app/feature");
+define('dashboard/pages/feature', function() {
 
     return React.createClass({
         render: function () {
@@ -18,3 +16,6 @@ define('app/feature', function() {
     })
 
 });
+
+// TODO: Add this feature dynamically to the global router e.g.
+// require("router/routes").add("feature", require("dashboard/pages/feature"))

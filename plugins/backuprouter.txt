@@ -1,0 +1,70 @@
+//
+//    Main App Router Utility
+//
+define('dashboard/router', function() {
+
+    // TODO: Add routes at runtime and dynamically update the router.
+
+    var Dashboard = require("dashboard");
+
+    var Router = require("react-router").Router;
+    var Route = require("react-router").Route;
+
+
+    var _routes = [];
+    var _root_node = "";
+
+    return {
+        addRoute : function(path, component){
+            _routes.push(<Route path={path} component={component} key={path} />)
+        },
+        getRoutes : function(){
+            return _routes;
+        },
+        getElement : function(){
+            return React.createElement(
+                React.createClass({
+                    render: function () {
+                        return (
+                            <Router>
+                                <Route path="/" component={Dashboard}>
+                                    {_routes}
+                                </Route>
+                            </Router>
+                        );
+                    }
+                })
+            )
+        },
+        render : function(domId){
+            if( domId ) {
+                this._root_node = domId;
+
+                require("react-dom").render(
+                    this.getElement(),
+                    document.getElementById(domId)
+                );
+            }
+        },
+        update : function(){
+            // If no root node set yet then we havent rendered it so do nothing
+            console.log("attempting to reload router in : " + this._root_node);
+            if( this._root_node ) this.render(this._root_node);
+        }
+    }
+
+});
+
+//
+//    Main Dashboard - default routes
+//
+define('dashboard/routes/default', function() {
+
+    var ErrorPage = require('dashboard/pages/404');
+    var Feature = require('dashboard/pages/feature');
+    var appRouter = require('dashboard/router');
+
+    appRouter.addRoute('feature', Feature);
+    appRouter.addRoute('*', ErrorPage);
+
+});

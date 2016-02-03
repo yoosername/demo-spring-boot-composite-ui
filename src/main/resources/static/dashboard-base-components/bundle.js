@@ -1,12 +1,63 @@
-console.log("Main App content plugin started");
+console.log("Dashboard components plugin loaded");
 
+/*
+    Note: Dont 'require' anything in a feature plugin outside of a define
+    because they are lazy loaded, so the feature might not be ready yet
+*/
 
 //
-//    Main App Nav Bar
+//    Main dashboard layout wrapper
 //
-define('app/navbar', function() {
+define('dashboard', function() {
 
-    console.log("defined app/navbar");
+    var AppNavbar = require("dashboard/navbar");
+    var AppSidebar = require("dashboard/sidebar");
+
+    return React.createClass({
+            render: function () {
+                return (
+                    React.createElement("div", {id: "wrapper"}, 
+                        React.createElement("div", {className: "row"}, 
+                            React.createElement("div", {className: "col-md-3"}, 
+                                React.createElement(AppSidebar, null)
+                            ), 
+                            React.createElement("div", {className: "col-md-9"}, 
+                                React.createElement("div", {className: "row"}, 
+                                    React.createElement(AppNavbar, null)
+                                ), 
+                                React.createElement("div", {className: "row"}, 
+                                    React.createElement("div", {id: "content", className: "feature-page"}, 
+                                        this.props.children
+                                    )
+                                )
+                            )
+                        )
+                    )
+                );
+            }
+        })
+
+});
+
+//
+//    Main Dashboard 404 page
+//
+define('dashboard/pages/404', function() {
+
+    return React.createClass({
+        render: function () {
+            return (
+                React.createElement("div", {className: "alert alert-danger"}, "Sorry that feature doesnt exist yet!!")
+            );
+        }
+    })
+
+});
+
+//
+//    Main Dashboard Nav Bar
+//
+define('dashboard/navbar', function() {
 
     var Link = require("react-router").Link;
 
@@ -31,11 +82,9 @@ define('app/navbar', function() {
 });
 
 //
-//    Main App Side Bar
+//    Main Dashboard Side Bar
 //
-define('app/sidebar', function() {
-
-    console.log("defined app/sidebar");
+define('dashboard/sidebar', function() {
 
     return React.createClass({
         render: function () {

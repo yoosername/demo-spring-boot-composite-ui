@@ -1,19 +1,59 @@
-console.log("Main App content plugin started");
+console.log("Dashboard components plugin loaded");
 
+/*
+    Note: Dont 'require' anything in a feature plugin outside of a define
+    because they are lazy loaded, so the feature might not be ready yet
+*/
 
 //
-//    Main App Nav Bar
+//    Main dashboard layout wrapper
 //
-define('app/navbar', function() {
+define('dashboard', function() {
+
+    var AppNavbar = require("dashboard/navbar");
+    var AppSidebar = require("dashboard/sidebar");
+
+    return React.createClass({
+            render: function () {
+                return (
+                    <div id="wrapper" >
+                        <div className="row">
+                            <div className="col-md-3">
+                                <AppSidebar />
+                            </div>
+                            <div className="col-md-9">
+                                <div className="row">
+                                    <AppNavbar />
+                                </div>
+                                <div className="row">
+                                    <div id="content" className="feature-page">
+                                        {this.props.children}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            }
+        })
+
+});
+
+//
+//    Main Dashboard Nav Bar
+//
+define('dashboard/navbar', function() {
+
+    var Link = require("react-router").Link;
 
     return React.createClass({
         render: function () {
             return (
                 <div className="navbar">
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#news">News</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><Link to="/welcome">Home</Link></li>
+                        <li><Link to="/feature">Feature</Link></li>
+                        <li><Link to="/doesntexist">Doesnt Exist</Link></li>
                         <ul className="nav-right">
                             <li><a className="active" href="#about">About</a></li>
                             <li><a href="#login">Login</a></li>
@@ -27,9 +67,9 @@ define('app/navbar', function() {
 });
 
 //
-//    Main App Side Bar
+//    Main Dashboard Side Bar
 //
-define('app/sidebar', function() {
+define('dashboard/sidebar', function() {
 
     return React.createClass({
         render: function () {

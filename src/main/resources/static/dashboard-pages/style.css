@@ -1,0 +1,9 @@
+/*
+    Feature page wrapper styles
+*/
+.feature-page{
+    width: 95%;
+    position: relative;
+    padding-left: 15px;
+    margin-left: 10px;
+}
