@@ -10,26 +10,16 @@ console.log("Dashboard components plugin loaded");
 //
 define('dashboard', function() {
 
-    var AppNavbar = require("dashboard/navbar");
-    var AppSidebar = require("dashboard/sidebar");
+    var AppNavigation = require("dashboard/navigation");
 
     return React.createClass({
             render: function () {
                 return (
-                    <div id="wrapper" >
-                        <div className="row">
-                            <div className="col-md-3">
-                                <AppSidebar />
-                            </div>
-                            <div className="col-md-9">
-                                <div className="row">
-                                    <AppNavbar />
-                                </div>
-                                <div className="row">
-                                    <div id="content" className="feature-page">
-                                        {this.props.children}
-                                    </div>
-                                </div>
+                    <div id="wrapper">
+                        <AppNavigation />
+                        <div id="page-wrapper">
+                            <div className="container-fluid">
+                                {this.props.children}
                             </div>
                         </div>
                     </div>
@@ -40,107 +30,167 @@ define('dashboard', function() {
 });
 
 //
-//    Main Dashboard Nav Bar
+//    Main Dashboard Side Bar
 //
-define('dashboard/navbar', function() {
+define('dashboard/navigation', function() {
 
     var Link = require("react-router").Link;
 
     return React.createClass({
         render: function () {
             return (
-                <div className="navbar">
-                    <ul>
-                        <li><Link to="/welcome">Home</Link></li>
-                        <li><Link to="/feature">Feature</Link></li>
-                        <li><Link to="/doesntexist">Doesnt Exist</Link></li>
-                        <ul className="nav-right">
-                            <li><a className="active" href="#about">About</a></li>
-                            <li><a href="#login">Login</a></li>
-                        </ul>
+                <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                    <div className="navbar-header">
+                        <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                            <span className="sr-only">Toggle navigation</span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                            <span className="icon-bar"></span>
+                        </button>
+                        <a className="navbar-brand" href="/">Composite Dashboard Demo</a>
+                    </div>
+                    <ul className="nav navbar-right top-nav">
+                        <li className="dropdown">
+                            <a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-envelope"></i> <b className="caret"></b></a>
+                            <ul className="dropdown-menu message-dropdown">
+                                <li className="message-preview">
+                                    <a href="#">
+                                        <div className="media">
+                                    <span className="pull-left">
+                                        <img className="media-object" src="http://placehold.it/50x50" alt="" />
+                                    </span>
+                                            <div className="media-body">
+                                                <h5 className="media-heading"><strong>John Smith</strong>
+                                                </h5>
+                                                <p className="small text-muted"><i className="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li className="message-preview">
+                                    <a href="#">
+                                        <div className="media">
+                                    <span className="pull-left">
+                                        <img className="media-object" src="http://placehold.it/50x50" alt="" />
+                                    </span>
+                                            <div className="media-body">
+                                                <h5 className="media-heading"><strong>John Smith</strong>
+                                                </h5>
+                                                <p className="small text-muted"><i className="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li className="message-preview">
+                                    <a href="#">
+                                        <div className="media">
+                                    <span className="pull-left">
+                                        <img className="media-object" src="http://placehold.it/50x50" alt="" />
+                                    </span>
+                                            <div className="media-body">
+                                                <h5 className="media-heading"><strong>John Smith</strong>
+                                                </h5>
+                                                <p className="small text-muted"><i className="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                                <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li className="message-footer">
+                                    <a href="#">Read All New Messages</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="dropdown">
+                            <a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-bell"></i> <b className="caret"></b></a>
+                            <ul className="dropdown-menu alert-dropdown">
+                                <li>
+                                    <a href="#">Alert Name <span className="label label-default">Alert Badge</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Alert Name <span className="label label-primary">Alert Badge</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Alert Name <span className="label label-success">Alert Badge</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Alert Name <span className="label label-info">Alert Badge</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Alert Name <span className="label label-warning">Alert Badge</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Alert Name <span className="label label-danger">Alert Badge</span></a>
+                                </li>
+                                <li className="divider"></li>
+                                <li>
+                                    <a href="#">View All</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li className="dropdown">
+                            <a href="#" className="dropdown-toggle" data-toggle="dropdown"><i className="fa fa-user"></i> John Smith <b className="caret"></b></a>
+                            <ul className="dropdown-menu">
+                                <li>
+                                    <a href="#"><i className="fa fa-fw fa-user"></i> Profile</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i className="fa fa-fw fa-envelope"></i> Inbox</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i className="fa fa-fw fa-gear"></i> Settings</a>
+                                </li>
+                                <li className="divider"></li>
+                                <li>
+                                    <a href="#"><i className="fa fa-fw fa-power-off"></i> Log Out</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
-                </div>
-            );
-        }
-    })
 
-});
-
-//
-//    Main Dashboard Side Bar
-//
-define('dashboard/sidebar', function() {
-
-    return React.createClass({
-        render: function () {
-            return (
-                <div className="nav-side-menu">
-                    <div className="brand">Composite UI Demo</div>
-                    <i className="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-
-                    <div className="menu-list">
-
-                        <ul id="menu-content" className="menu-content collapse out">
+                    <div className="collapse navbar-collapse navbar-ex1-collapse">
+                        <ul className="nav navbar-nav side-nav">
+                            <li className="active">
+                                <Link to="/"><i className="fa fa-fw fa-dashboard"></i> Dashboard</Link>
+                            </li>
                             <li>
-                                <a href="#">
-                                    <i className="fa fa-dashboard fa-lg"></i> Dashboard
-                                </a>
+                                <Link to="charts"><i className="fa fa-fw fa-bar-chart-o"></i> Charts</Link>
                             </li>
-
-                            <li  data-toggle="collapse" data-target="#products" className="collapsed active">
-                                <a href="#">
-                                    <i className="fa fa-gift fa-lg"></i>
-                                    UI Elements <span className="arrow"></span>
-                                </a>
-                            </li>
-                            <ul className="sub-menu collapse" id="products">
-                                <li className="active"><a href="#">CSS3 Animation</a></li>
-                                <li><a href="#">General</a></li>
-                                <li><a href="#">Buttons</a></li>
-                                <li><a href="#">Tabs & Accordions</a></li>
-                                <li><a href="#">Typography</a></li>
-                                <li><a href="#">FontAwesome</a></li>
-                                <li><a href="#">Slider</a></li>
-                                <li><a href="#">Panels</a></li>
-                                <li><a href="#">Widgets</a></li>
-                                <li><a href="#">Bootstrap Model</a></li>
-                            </ul>
-
-
-                            <li data-toggle="collapse" data-target="#service" className="collapsed">
-                                <a href="#"><i className="fa fa-globe fa-lg"></i> Services <span className="arrow"></span></a>
-                            </li>
-                            <ul className="sub-menu collapse" id="service">
-                                <li>New Service 1</li>
-                                <li>New Service 2</li>
-                                <li>New Service 3</li>
-                            </ul>
-
-
-                            <li data-toggle="collapse" data-target="#new" className="collapsed">
-                                <a href="#"><i className="fa fa-car fa-lg"></i> New <span className="arrow"></span></a>
-                            </li>
-                            <ul className="sub-menu collapse" id="new">
-                                <li>New New 1</li>
-                                <li>New New 2</li>
-                                <li>New New 3</li>
-                            </ul>
-
-
                             <li>
-                                <a href="#">
-                                    <i className="fa fa-user fa-lg"></i> Profile
-                                </a>
+                                <a href="tables.html"><i className="fa fa-fw fa-table"></i> Tables</a>
                             </li>
-
                             <li>
-                                <a href="#">
-                                    <i className="fa fa-users fa-lg"></i> Users
-                                </a>
+                                <a href="forms.html"><i className="fa fa-fw fa-edit"></i> Forms</a>
+                            </li>
+                            <li>
+                                <a href="bootstrap-elements.html"><i className="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                            </li>
+                            <li>
+                                <a href="bootstrap-grid.html"><i className="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i className="fa fa-fw fa-arrows-v"></i> Dropdown <i className="fa fa-fw fa-caret-down"></i></a>
+                                <ul id="demo" className="collapse">
+                                    <li>
+                                        <a href="#">Dropdown Item</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Dropdown Item</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="blank-page.html"><i className="fa fa-fw fa-file"></i> Blank Page</a>
+                            </li>
+                            <li>
+                                <a href="index-rtl.html"><i className="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
                             </li>
                         </ul>
                     </div>
-                </div>
+
+                </nav>
             );
         }
     })

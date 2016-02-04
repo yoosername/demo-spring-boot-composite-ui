@@ -34,6 +34,7 @@ public class DefaultUIService implements UIService {
     private List<String> getActiveUIPlugins(){
         // In spring cloud world this would lookup active services which provide a ui component
         return Arrays.asList(
+            "dashboard-components",
             "dashboard-layout",
             "dashboard-pages",
             "dashboard-router",
