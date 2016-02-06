@@ -1,7 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
-
 import { Link } from 'react-router';
 
 export class Navigation extends React.Component {
@@ -9,6 +6,7 @@ export class Navigation extends React.Component {
     render() {
         return (
             <nav className="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
                 <div className="navbar-header">
                     <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                         <span className="sr-only">Toggle navigation</span>
@@ -16,57 +14,99 @@ export class Navigation extends React.Component {
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
                     </button>
-                    <a className="navbar-brand" href="/">Composite Dashboard Demo</a>
+                    <a className="navbar-brand" href="/">Dashboard</a>
                 </div>
-                <ul className="nav navbar-right top-nav">
+
+                <ul className="nav navbar-top-links navbar-right">
                     <li className="dropdown">
                         <Link to="#" className="dropdown-toggle" data-toggle="dropdown">
-                            <i className="fa fa-user"></i> John Smith <b className="caret"></b>
+                            <i className="fa fa-user"></i> Profile <b className="caret"></b>
                         </Link>
                         <ul className="dropdown-menu">
                             <li>
-                                <Link to="about"><i className="fa fa-fw fa-user"></i> About</Link>
-                            </li>
-                            <li className="divider"></li>
-                            <li>
-                                <Link to="profile"><i className="fa fa-fw fa-envelope"></i> Profile</Link>
+                                <Link to="password"><i className="fa fa-fw fa-user"></i> Manage Password</Link>
                             </li>
                         </ul>
                     </li>
-                    {this.props.navbarmenuitems}
                 </ul>
-
-                <div className="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul className="nav navbar-nav side-nav">
-                        <li className="active">
-                            <Link to="/"><i className="fa fa-fw fa-dashboard"></i>Dashboard</Link>
-                        </li>
-                        <li>
-                            <Link to="javascript:;" data-toggle="collapse" data-target="#demo">
-                                <i className="fa fa-fw fa-arrows-v"></i> Accounts <i className="fa fa-fw fa-caret-down"></i>
-                            </Link>
-                            <ul id="demo" className="collapse">
-                                <li>
-                                    <Link to="bitbucket">Bitbucket</Link>
-                                </li>
-                                <li>
-                                    <Link to="jira">Jira</Link>
-                                </li>
-                                <li>
-                                    <Link to="confluence">Confluence</Link>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <Link to="downloads"><i className="fa fa-fw fa-table"></i>Downloads</Link>
-                        </li>
-                        <li>
-                            <Link to="stats"><i className="fa fa-fw fa-edit"></i>Stats</Link>
-                        </li>
-                        {this.props.sidebarmenuitems}
-                    </ul>
+                
+                <div className="navbar-default navbar-static-side" role="navigation">
+                    <div className="sidebar-collapse">
+                        <ul className="nav" id="side-menu">
+                            <li className="sidebar-search">
+                                <div className="input-group custom-search-form">
+                                    <input type="text" className="form-control" placeholder="Search..."></input>
+                                    <span className="input-group-btn">
+                                        <button className="btn btn-default" type="button">
+                                            <i className="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </li>
+                            <li>
+                                <Link to="/"><i className="fa fa-dashboard fa-fw"></i> Dashboard</Link>
+                            </li>
+                            <li>
+                                <Link to="#"><i className="fa fa-bar-chart-o fa-fw"></i> Accounts<span className="fa arrow"></span></Link>
+                                <ul className="nav nav-second-level collapse">
+                                    <li>
+                                        <Link to="account1">Account1</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="account2">Account2</Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <Link to="os"><i className="fa fa-table fa-fw"></i> Open Source</Link>
+                            </li>
+                            <li>
+                                <Link to="stuff"><i className="fa fa-edit fa-fw"></i> Stuff</Link>
+                            </li>
+                            <li>
+                                <Link to="#"><i className="fa fa-wrench fa-fw"></i> Version Control<span className="fa arrow"></span></Link>
+                                <ul className="nav nav-second-level collapse">
+                                    <li>
+                                        <Link to="bitbucket">Bitbucket</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="jira">Jira</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="confluence">Confluence</Link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <Link to="#">
+                                    <i className="fa fa-sitemap fa-fw"></i> Repositories<span className="fa arrow"></span>
+                                </Link>
+                                <ul className="nav nav-second-level collapse">
+                                    <li>
+                                        <Link to="nexus">Nexus</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="npm">NPM</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="#">Mirrors <span className="fa arrow"></span></Link>
+                                        <ul className="nav nav-third-level collapse">
+                                            <li>
+                                                <Link to="gems">Gems</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="pypy">PyPy</Link>
+                                            </li>
+                                            <li>
+                                                <Link to="maven">Maven</Link>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
             </nav>
         );
     }

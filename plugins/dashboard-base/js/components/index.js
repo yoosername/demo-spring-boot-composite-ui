@@ -3,3 +3,4 @@ export * from './PageHeader';
 export * from './PageHighlight';
 export * from './RecentTasks';
 export * from './Navigation';
+export * from './Navbar';
