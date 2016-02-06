@@ -34,23 +34,19 @@ public class DefaultUIService implements UIService {
     private List<String> getActiveUIPlugins(){
         // In spring cloud world this would lookup active services which provide a ui component
         return Arrays.asList(
-            "dashboard-components",
-            "dashboard-layout",
-            "dashboard-pages",
-            "dashboard-router",
-            "dashboard-feature-basic"
+            "dashboard-base"
         );
     }
 
     private void updateCSSImports() {
         // Fake looking up css from service registry and returning a list of locations
         List<String> tmpCSS = new ArrayList<String>();
-        for( String plugin : getActiveUIPlugins() ) {
-            tmpCSS.add(plugin + "/style.css");
-        }
-        css = tmpCSS;
+        //for( String plugin : getActiveUIPlugins() ) {
+        //    tmpCSS.add(plugin + "/style.css");
+        //}
+        //css = tmpCSS;
         // probably send UPDATED_CSS_EVENT
-        log.info("CSS Bundles updated: " + css.toString());
+        //log.info("CSS Bundles updated: " + css.toString());
     }
 
     private String read(String file){
@@ -82,7 +78,7 @@ public class DefaultUIService implements UIService {
 
         // for each plugin get bundle contents and add it
         for( String plugin : getActiveUIPlugins() ) {
-            bundle += preBundleFrag + getJSContents("static/"+plugin+"/bundle.js") + postBundleFrag;
+            bundle += preBundleFrag + getJSContents("static/plugins/"+plugin+"/dist/bundle.js") + postBundleFrag;
         }
 
         // tail with the end fragment
