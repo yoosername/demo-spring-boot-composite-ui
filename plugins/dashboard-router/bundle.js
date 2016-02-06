@@ -1,8 +1,10 @@
 console.log("Dashboard dynamic App router loader");
 
-//
-//    Generic Route Store
-//
+/*
+ *
+ * Defines standard dashboard Base Routing
+ *
+ */
 define('router/routes', function() {
 
     var React = require("react");
@@ -54,20 +56,20 @@ define('dashboard/routes/base', function() {
         path: '/',
 
         getChildRoutes(location, callback) {
-            console.log("getChildRoutes called: ");
-            console.log(location);
+            //console.log("getChildRoutes called: ");
+            //console.log(location);
             callback(null, require("router/routes").get(location.pathname));
         },
 
         getIndexRoute(location, callback) {
-            console.log("getIndexRoute called: ");
-            console.log(location);
+            //console.log("getIndexRoute called: ");
+            //console.log(location);
             callback(null, require("router/routes").get("welcome"));
         },
 
         getComponents(location, callback) {
-            console.log("getComponentss called: ");
-            console.log(location);
+            //console.log("getComponentss called: ");
+            //console.log(location);
             callback(null, require('dashboard'));
         }
     };

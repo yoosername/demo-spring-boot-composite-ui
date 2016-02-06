@@ -1,5 +1,30 @@
 console.log("Dashboard page components plugin loaded");
 
+/*
+*
+* Defines standard dashboard page components
+*
+*/
+define('dashboard/components/routedmenuitem', function() {
+
+    var React = require("react");
+    var Route = require("react-router").Route;
+
+    return React.createClass({
+        render: function () {
+            return (
+                <li>
+                    <Link to={this.props.path}>
+                        <i className="fa fa-fw fa-arrows-v"></i> {this.props.name} <i className="fa fa-fw fa-caret-down"></i>
+                    </Link>
+                    <Route path={this.props.path} component={this.props.component} key={this.props.path} />
+                </li>
+            );
+        }
+    })
+
+});
+
 //
 //    Dashboard page header + breadcrumbs
 //
