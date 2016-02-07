@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import {Link} from '../components';
 
 export class Navigation extends React.Component {
 
@@ -14,7 +14,7 @@ export class Navigation extends React.Component {
                         <span className="icon-bar"></span>
                         <span className="icon-bar"></span>
                     </button>
-                    <a className="navbar-brand" href="/">Dashboard</a>
+                    <Link className="navbar-brand" to="/">Dashboard</Link>
                 </div>
 
                 <ul className="nav navbar-top-links navbar-right">

@@ -1,10 +1,33 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//import {Navigation} from '../components';
 import {Navigation} from '../components';
+import DashboardPageStore from '../stores/DashboardPageStore';
+
+import {WelcomePage} from '../pages';
+
+function getStateFromStores() {
+    return {
+        page: DashboardPageStore.getCurrentPage()
+    };
+}
 
 export class Dashboard extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            page: (<WelcomePage />)
+        };
+    }
+
+    componentDidMount() {
+        DashboardPageStore.addChangeListener(this._onChange.bind(this));
+    }
+
+    componentWillUnmount() {
+        DashboardPageStore.removeChangeListener(this._onChange.bind(this));
+    }
 
     render() {
         return(
@@ -12,10 +35,15 @@ export class Dashboard extends React.Component {
                 <Navigation />
                 <div id="page-wrapper">
                     <div className="container-fluid">
-                        {this.props.children}
+                        {this.state.page}
                     </div>
                 </div>
             </div>
         );
+    }
+
+
+    _onChange() {
+        this.setState(getStateFromStores());
     }
 }

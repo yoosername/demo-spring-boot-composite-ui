@@ -8,7 +8,7 @@ export class Missing404Page extends React.Component {
         return(
             <div className="container-fluid">
                 <PageHeader title="404" subtitle="Page not found" breadcrumb="404"/>
-                <div className="alert alert-danger" >Sorry that feature page doesnt exist yet!!</div>
+                <div className="alert alert-danger" >Sorry a page doesnt exist for {this.props.path} yet!!</div>
             </div>
         );
     }
