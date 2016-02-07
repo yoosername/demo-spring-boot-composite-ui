@@ -13,10 +13,19 @@
     "babel-loader": "^6.2.1",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "browserify-react-live": "^3.1.3",
     "webpack": "^1.12.12"
   },
   "dependencies": {
+    "events": "^1.1.0",
+    "flux": "^2.1.1",
     "history": "^1.17.0",
+    "keymirror": "^0.1.1",
+    "material-ui": "^0.14.4",
+    "materialize-css": "^0.97.5",
+    "object-assign": "^4.0.1",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^1.0.3"

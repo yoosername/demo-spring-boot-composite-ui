@@ -10,11 +10,7 @@ export class PageHeader extends React.Component {
                         <h1 className="page-header">
                             {this.props.title} <small>{this.props.subtitle}</small>
                         </h1>
-                        <ol className="breadcrumb">
-                            <li className="active">
-                                <i className="fa fa-dashboard"></i> {this.props.breadcrumb}
-                            </li>
-                        </ol>
+                        {this.props.children}
                     </div>
                 </div>
             </div>
