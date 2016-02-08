@@ -30,7 +30,16 @@ MiniRouter
     })
     .listen();
 
-window.MiniRouter = MiniRouter;
-window.DashboardPageActions = DashboardPageActions;
+window.Dash = {
+    go : MiniRouter.navigate,
+    router: MiniRouter,
+    actions: {
+        page: DashboardPageActions
+    },
+    pages : {
+        home : (<HomePage />),
+        password : (<ManagePasswordPage />)
+    }
+}
 
 

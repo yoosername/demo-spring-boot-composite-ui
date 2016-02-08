@@ -2,7 +2,11 @@
 
 module.exports = {
     entry: './js/main.js',
-    output: { path: __dirname + "/dist", filename: 'bundle.js' },
+    output: {
+        path: __dirname + "/dist",
+        filename: 'bundle.js',
+        library: ['Dashboard', 'something']
+    },
     module: {
         loaders: [
             {

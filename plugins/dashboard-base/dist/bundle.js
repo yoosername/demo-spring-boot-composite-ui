@@ -1325,8 +1325,17 @@ _MiniRouter2.default.add(function () {
     _DashboardPageActions2.default.setCurrentPage(_react2.default.createElement(_pages.ManagePasswordPage, null));
 }).listen();
 
-window.MiniRouter = _MiniRouter2.default;
-window.DashboardPageActions = _DashboardPageActions2.default;
+window.Dash = {
+    go: _MiniRouter2.default.navigate,
+    router: _MiniRouter2.default,
+    actions: {
+        page: _DashboardPageActions2.default
+    },
+    pages: {
+        home: _react2.default.createElement(_pages.HomePage, null),
+        password: _react2.default.createElement(_pages.ManagePasswordPage, null)
+    }
+};
 
 },{"./actions/DashboardPageActions":1,"./layout":12,"./pages":17,"./router/MiniRouter":18,"react":209,"react-dom":53}],14:[function(require,module,exports){
 'use strict';
