@@ -19,16 +19,6 @@ public class CompositeUIController {
     @Autowired
     UIService ui;
 
-    @RequestMapping("/")
-    public String getComposite(Model model) {
-
-        // The ui service should have up to date cache of css and js by now
-        model.addAttribute("css", ui.getCSSImports());
-        model.addAttribute("js", ui.getJSBundle());
-        return "main";
-
-    }
-
     @RequestMapping("/bundle.js")
     public void getJSBundle(HttpServletResponse response) {
 
@@ -38,6 +28,16 @@ public class CompositeUIController {
         } catch (IOException e) {
             log.info("Error writing file to output stream. ");
         }
+
+    }
+
+    @RequestMapping("/*")
+    public String getComposite(Model model) {
+
+        // The ui service should have up to date cache of css and js by now
+        model.addAttribute("css", ui.getCSSImports());
+        model.addAttribute("js", ui.getJSBundle());
+        return "main";
 
     }
 

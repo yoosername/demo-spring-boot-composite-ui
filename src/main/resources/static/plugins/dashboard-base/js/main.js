@@ -7,6 +7,10 @@ import {Dashboard} from './layout';
 import {Missing404Page, HomePage,ManagePasswordPage} from './pages';
 
 import DashboardPageActions from './actions/DashboardPageActions';
+import DashboardMenuActions from './actions/DashboardMenuActions';
+import DebugListener from './stores/DebugListener';
+
+import {Section} from './components/Navigation';
 
 // Render the Dashboard App
 ReactDOM.render((
@@ -14,23 +18,43 @@ ReactDOM.render((
 ), document.getElementById("app"));
 
 
-// Add some base dashboard routes & start listening
+//TODO Possibly nicer syntax...
+//DashboardPageActions
+//    .addRoute(<HomePage />)
+//    .addRoute('*', <Missing404Page />)
+//    .addRoute('password', <ManagePasswordPage />);
+
+// Add some default dashboard routes & start listening
 MiniRouter
     .add(function() {
-        console.log('Home page selected for index route');
         DashboardPageActions.setCurrentPage((<HomePage />));
     })
     .add('*', function(path) {
-        console.log('Missing page selected for missing route: ' + path);
         DashboardPageActions.setCurrentPage((<Missing404Page path={path}/>));
     })
     .add('password', function(path) {
-        console.log('Manage Password page selected');
         DashboardPageActions.setCurrentPage((<ManagePasswordPage />));
     })
     .listen();
 
-window.MiniRouter = MiniRouter;
-window.DashboardPageActions = DashboardPageActions;
+// Add some default Menu Items
+DashboardMenuActions.addMenuItem(<Section key="test" to="test" icon="fa fa-dashboard fa-fw">Test</Section>);
 
 
+// Expose a global for other page bundles to reuse
+window.Dash, window.parent.window.Dash = {
+    go : MiniRouter.navigate,
+    router: MiniRouter,
+    actions: {
+        page: DashboardPageActions,
+        menu: DashboardMenuActions
+    },
+    pages : {
+        home : (<HomePage />),
+        password : (<ManagePasswordPage />)
+    },
+    debug : DebugListener
+}
+
+// Require css bundle
+//var css = require('../css/dashboard.css');

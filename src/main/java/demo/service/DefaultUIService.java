@@ -78,7 +78,7 @@ public class DefaultUIService implements UIService {
 
         // for each plugin get bundle contents and add it
         for( String plugin : getActiveUIPlugins() ) {
-            bundle += preBundleFrag + getJSContents("static/plugins/"+plugin+"/dist/bundle.js") + postBundleFrag;
+            bundle += preBundleFrag + getJSContents("static/plugins/"+plugin+"/dist/js/bundle.js") + postBundleFrag;
         }
 
         // tail with the end fragment
