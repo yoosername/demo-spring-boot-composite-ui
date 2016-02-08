@@ -1,12 +1,6 @@
-
-
 module.exports = {
     entry: './js/main.js',
-    output: {
-        path: __dirname + "/dist",
-        filename: 'bundle.js',
-        library: ['Dashboard', 'something']
-    },
+    output: { path: __dirname + "/dist/js", filename: 'bundle.js' },
     module: {
         loaders: [
             {

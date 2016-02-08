@@ -9,7 +9,13 @@ class DashboardPageActions {
      * @param  {jsx} menuItem
      */
     setCurrentPage(jsx) {
-        console.log("dispatching action SET_CURRENT_PAGE")
+        DashboardDispatcher.dispatch({
+            type: ActionTypes.SET_CURRENT_PAGE,
+            page: jsx
+        });
+    }
+
+    addRoute(path, jsx) {
         DashboardDispatcher.dispatch({
             type: ActionTypes.SET_CURRENT_PAGE,
             page: jsx

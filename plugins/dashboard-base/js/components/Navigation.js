@@ -1,7 +1,99 @@
 import React from 'react';
 import {Link} from '../components';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
+import DashboardMenuStore from '../stores/DashboardMenuStore';
+
+function getStateFromStores() {
+    return {
+        menuItems: DashboardMenuStore.getMenuItems()
+    };
+}
+
+export class Section extends React.Component {
+
+    render() {
+        return (
+            <li>
+                <Link to={this.props.to}><i className={this.props.icon}></i> {this.props.children}</Link>
+            </li>
+        );
+    }
+}
+
+class ExpandSection extends React.Component {
+
+    constructor(){
+        super();
+
+        this.state = {
+            open: false,
+            class: "nav nav-second-level collapse"
+        };
+    }
+
+    handleClick(event){
+
+        event.preventDefault();
+
+        if(this.state.open) {
+            this.setState({
+                open: false,
+                class: "nav nav-second-level collapse"
+            });
+        }else{
+            this.setState({
+                open: true,
+                class: "nav nav-second-level collapse in"
+            });
+        }
+    }
+
+    render() {
+        return (
+            <li>
+                <a href="#" onClick={this.handleClick.bind(this)}>
+                    <i className={this.props.icon} />
+                    {this.props.title}
+                    <span className="fa arrow"></span>
+                </a>
+                <ul className={this.state.class}>
+                    {this.props.children}
+                </ul>
+            </li>
+        );
+    }
+}
+
+class Sidemenu extends React.Component{
+    render() {
+        return (
+            <div className="navbar-default sidebar">
+                <div className="sidebar-nav navbar-collapse">
+                    <ul className="nav">
+                        {this.props.children}
+                    </ul>
+                </div>
+            </div>
+        );
+    }
+}
 
 export class Navigation extends React.Component {
+
+    constructor(){
+        super();
+
+        this.state = getStateFromStores();
+    }
+
+    componentDidMount() {
+        DashboardMenuStore.addChangeListener(this._onChange.bind(this));
+    }
+
+    componentWillUnmount() {
+        DashboardMenuStore.removeChangeListener(this._onChange.bind(this));
+    }
 
     render() {
         return (
@@ -29,85 +121,23 @@ export class Navigation extends React.Component {
                         </ul>
                     </li>
                 </ul>
-                
-                <div className="navbar-default navbar-static-side" role="navigation">
-                    <div className="sidebar-collapse">
-                        <ul className="nav" id="side-menu">
-                            <li className="sidebar-search">
-                                <div className="input-group custom-search-form">
-                                    <input type="text" className="form-control" placeholder="Search..."></input>
-                                    <span className="input-group-btn">
-                                        <button className="btn btn-default" type="button">
-                                            <i className="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </li>
-                            <li>
-                                <Link to="/"><i className="fa fa-dashboard fa-fw"></i> Dashboard</Link>
-                            </li>
-                            <li>
-                                <Link to="#"><i className="fa fa-bar-chart-o fa-fw"></i> Accounts<span className="fa arrow"></span></Link>
-                                <ul className="nav nav-second-level collapse">
-                                    <li>
-                                        <Link to="account1">Account1</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="account2">Account2</Link>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <Link to="os"><i className="fa fa-table fa-fw"></i> Open Source</Link>
-                            </li>
-                            <li>
-                                <Link to="stuff"><i className="fa fa-edit fa-fw"></i> Stuff</Link>
-                            </li>
-                            <li>
-                                <Link to="#"><i className="fa fa-wrench fa-fw"></i> Version Control<span className="fa arrow"></span></Link>
-                                <ul className="nav nav-second-level collapse">
-                                    <li>
-                                        <Link to="bitbucket">Bitbucket</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="jira">Jira</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="confluence">Confluence</Link>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <Link to="#">
-                                    <i className="fa fa-sitemap fa-fw"></i> Repositories<span className="fa arrow"></span>
-                                </Link>
-                                <ul className="nav nav-second-level collapse">
-                                    <li>
-                                        <Link to="nexus">Nexus</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="npm">NPM</Link>
-                                    </li>
-                                    <li>
-                                        <Link to="#">Mirrors <span className="fa arrow"></span></Link>
-                                        <ul className="nav nav-third-level collapse">
-                                            <li>
-                                                <Link to="gems">Gems</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="pypy">PyPy</Link>
-                                            </li>
-                                            <li>
-                                                <Link to="maven">Maven</Link>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
+                <Sidemenu>
+                    <Section to="account1" icon="fa fa-dashboard fa-fw">Dashboard</Section>
+                    <Section to="account1" icon="fa fa-fw fa-user">Account 1</Section>
+                    <Section to="account2" icon="fa fa-fw fa-user">Account 2</Section>
+                    <ExpandSection title="stuff" icon="fa fa-fw fa-user">
+                        <Section to="submenu1" icon="fa fa-fw fa-user">Sub Menu 1</Section>
+                        <Section to="submenu2" icon="fa fa-fw fa-user">Sub Menu 2</Section>
+                    </ExpandSection>
+                    <Section to="things" icon="fa fa-fw fa-user">Things</Section>
+                    {this.state.menuItems}
+                </Sidemenu>
             </nav>
         );
+    }
+
+    _onChange() {
+        this.setState(getStateFromStores());
     }
 }

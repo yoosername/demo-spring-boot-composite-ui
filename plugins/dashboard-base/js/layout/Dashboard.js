@@ -33,10 +33,8 @@ export class Dashboard extends React.Component {
         return(
             <div id="wrapper">
                 <Navigation />
-                <div id="page-wrapper">
-                    <div className="container-fluid">
+                <div id="page-wrapper" className="dashboard-page">
                         {this.state.page}
-                    </div>
                 </div>
             </div>
         );

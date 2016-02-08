@@ -41,7 +41,7 @@ export class Link extends React.Component {
         event.preventDefault()
 
         if (allowTransition) {
-            console.log("Firing MiniRouter.navigate");
+            //console.log("Firing MiniRouter.navigate");
             MiniRouter.navigate(this.props.to);
         }
 

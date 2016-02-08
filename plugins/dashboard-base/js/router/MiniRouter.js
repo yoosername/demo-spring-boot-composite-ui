@@ -23,18 +23,18 @@ class Router {
         }
 
         if(clearSlashes(re) == ""){
-            console.log("adding index route handler");
+            //console.log("adding index route handler");
             indexRouteHandler = handler;
             return this;
         }
 
         if(clearSlashes(re) == "*"){
-            console.log("adding default route handler");
+            //console.log("adding default route handler");
             defaultRouteHandler = handler;
             return this;
         }
 
-        console.log("adding new route: '" + re + "'");
+        //console.log("adding new route: '" + re + "'");
         routes.push({ re: re, handler: handler});
 
         return this;
@@ -71,12 +71,12 @@ class Router {
         }
 
         for (var i = 0; i < routes.length; i++) {
-            console.log("Comparing path='" + path + "' to regex='" + routes[i].re + "'");
+            //console.log("Comparing path='" + path + "' to regex='" + routes[i].re + "'");
 
             var match = path.match(routes[i].re);
 
             if (match) {
-                console.log("route found for path: '" + path + "'");
+                //console.log("route found for path: '" + path + "'");
                 match.shift();
                 routes[i].handler.apply({}, match);
                 return this;
@@ -90,7 +90,7 @@ class Router {
     }
 
     listen() {
-        console.log("Starting to Listen for History pushstate events");
+        //console.log("Starting to Listen for History pushstate events");
         var self = this;
 
         // Stop previous listener
@@ -99,7 +99,7 @@ class Router {
         }
         // Start a new one
         unlisten = history.listen(location => {
-            console.log("Pushstate event caught for path '" + location.pathname + "'");
+            //console.log("Pushstate event caught for path '" + location.pathname + "'");
             self.check(location.pathname);
         });
         return this;
@@ -114,7 +114,7 @@ class Router {
 
     navigate(path) {
         path = path ? path : '';
-        console.log("Attempting to navigate to: " + root + clearSlashes(path));
+        //console.log("Attempting to navigate to: " + root + clearSlashes(path));
         history.push({
             pathname: root + clearSlashes(path)
         })

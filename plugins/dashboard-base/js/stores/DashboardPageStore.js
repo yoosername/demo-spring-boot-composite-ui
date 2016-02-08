@@ -7,6 +7,7 @@ var ActionTypes = DashboardConstants.ActionTypes;
 
 
 var currentPage = null;
+var pages = [];
 
 class DashboardPageStore extends FluxStore {
 
@@ -16,6 +17,18 @@ class DashboardPageStore extends FluxStore {
 
     getCurrentPage () {
         return currentPage;
+    }
+
+    add(page){
+        pages.push(page);
+    }
+
+    remove(page){
+        for(p in pages){
+            if(page == p){
+                delete pages[p];
+            }
+        }
     }
 
 }
@@ -29,12 +42,18 @@ DashboardPageStoreInstance.dispatchToken = DashboardDispatcher.register(function
         case ActionTypes.SET_CURRENT_PAGE:
             currentPage = action.page;
             DashboardPageStoreInstance.emitChange();
-            console.log("Page set to : " + action.page);
+            //console.log("Page set to : " + action.page);
+            break;
+
+        case ActionTypes.ADD_PAGE:
+            DashboardPageStoreInstance.add(action.page);
+            DashboardPageStoreInstance.emitChange();
+            //console.log("Page set to : " + action.page);
             break;
 
         default:
-            console.log("dispatcher fired but i didnt recognise it");
-            console.log(action.type);
+            //console.log("dispatcher fired but i didnt recognise it");
+            //console.log(action.type);
     }
 
 });
