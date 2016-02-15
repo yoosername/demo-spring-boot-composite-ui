@@ -34,19 +34,9 @@ public class DefaultUIService implements UIService {
     private List<String> getActiveUIPlugins(){
         // In spring cloud world this would lookup active services which provide a ui component
         return Arrays.asList(
-            "dashboard-base"
+            "dashboard",
+            "dashboard-plugin"
         );
-    }
-
-    private void updateCSSImports() {
-        // Fake looking up css from service registry and returning a list of locations
-        List<String> tmpCSS = new ArrayList<String>();
-        //for( String plugin : getActiveUIPlugins() ) {
-        //    tmpCSS.add(plugin + "/style.css");
-        //}
-        //css = tmpCSS;
-        // probably send UPDATED_CSS_EVENT
-        //log.info("CSS Bundles updated: " + css.toString());
     }
 
     private String read(String file){
@@ -70,15 +60,23 @@ public class DefaultUIService implements UIService {
 
     private void updateJSBundles() {
 
-        // TODO: Perhaps wrap the bundles with try / catch with useful error to see what didnt load
-        // load the start fragment for the bundle closure
+        // TODO: The main webapp is a standard html5 using a single bundle.js
+        // TODO: bundle.js is served from a special ResourcePath: /bundle.js
+        // TODO: when bundle.js is requested the cached optmised bundle is returned
+        // TODO: when something changes in a plugin ( e.g. because of a file watcher or because of eureka changes)
+        // TODO:    - the modified plugin bundle is reread and the define statements are plucked out of it into memory.
+        // TODO: All cached plugin defines are wrapped in closures & try catch so they dont break anything else. then combined into a single bundle.js
+        // TODO: the change is sent to all clients via websockets to force the new bundle to be downloaded
+        // TODO: in theory the new js can be loaded over the old one and react will simply compare the diff without much hassle.
+        // TODO: the single dahboard bundle itself is wrapped such that if in AMD environment it can be required as a module.
+
         String bundle = getJSContents("static/fragments/start.frag");
         String preBundleFrag = getJSContents("static/fragments/preBundle.frag");
         String postBundleFrag = getJSContents("static/fragments/postBundle.frag");
 
         // for each plugin get bundle contents and add it
         for( String plugin : getActiveUIPlugins() ) {
-            bundle += preBundleFrag + getJSContents("static/plugins/"+plugin+"/dist/js/bundle.js") + postBundleFrag;
+            bundle += preBundleFrag + getJSContents("static/plugins/"+plugin+"/bundle.js") + postBundleFrag;
         }
 
         // tail with the end fragment
@@ -92,14 +90,8 @@ public class DefaultUIService implements UIService {
     @Override
     @PostConstruct
     public void updateResources() {
-        updateCSSImports();
         updateJSBundles();
         log.info("JS and CSS RESOURCES UPDATED");
-    }
-
-    @Override
-    public List<String> getCSSImports() {
-        return css;
     }
 
     @Override

@@ -1,32 +1,18 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html>
 <head>
-    <title>Composite Dashboard Demo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
-    <link href="plugins/dashboard-base/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css"></link>
-    <link href="plugins/dashboard-base/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"></link>
-    <link href="plugins/dashboard-base/bower_components/sb-admin-2/css/sb-admin-2.css" rel="stylesheet" type="text/css"></link>
-    <style>
-        .dashboard-page{
-            margin-top: 50px !important;
-        }
-    </style>
+    <title>Redux React Dashboard Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.cyan-light_blue.min.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
 </head>
 <body>
-
-<div id="app"></div>
-<script src="plugins/dashboard-base/bower_components/jquery/dist/jquery.js"></script>
-<script src="plugins/dashboard-base/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-<script src="plugins/dashboard-base/bower_components/metisMenu/dist/metisMenu.js"></script>
-<script src="plugins/dashboard-base/bower_components/sb-admin-2/js/sb-admin-2.js"></script>
-<script src="plugins/dashboard-base/bower_components/almond/almond.js"></script>
-
+<div id="root"></div>
+<!--<script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+  this seems to cause problems messing with the dom outside of react.
+-->
 <script src="bundle.js"></script>
-
-<script>
-    require("dashboard");
-</script>
-
 </body>
 </html>

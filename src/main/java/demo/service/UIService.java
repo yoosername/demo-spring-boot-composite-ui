@@ -7,6 +7,5 @@ import java.util.List;
 public interface UIService {
     public void updateResources();
 
-    public List<String> getCSSImports();
     public String getJSBundle();
 }
